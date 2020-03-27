@@ -1,0 +1,47 @@
+version: 0.2
+
+phases:
+  install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    runtime-versions:
+       java: openjdk11
+      # name: version
+    commands:
+      # - apt-get update -y
+      # - apt-get install -y maven
+      # - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+      # - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+      # - command
+  pre_build:
+    commands:
+      # - $(aws ecr get-login --no-include-email --region ap-southeast-1)
+      # - command
+  build:
+    commands:
+       - ./gradlew sonarqube -Dsonar.host.url=http://3.1.195.9:9000 -Dsonar.login=fca2406e0a59ea4c45634c0e28f18c0e24efe02d
+      # - echo Building Docker image
+      # - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      # - command
+  post_build:
+    commands:
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      # - command
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+# artifacts:
+ # files:
+    # - target/shopfront-0.0.1-SNAPSHOT.jar
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
